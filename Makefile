@@ -218,7 +218,8 @@ BINARIES_DIR := $(BASE_DIR)/images
 # The target directory is common to all packages,
 # but there is one that is specific to each filesystem.
 BASE_TARGET_DIR := $(BASE_DIR)/target
-TARGET_DIR = $(if $(ROOTFS),$(ROOTFS_$(ROOTFS)_TARGET_DIR),$(BASE_TARGET_DIR))
+REAL_TARGET_DIR = $(if $(ROOTFS),$(ROOTFS_$(ROOTFS)_TARGET_DIR),$(BASE_TARGET_DIR))
+TARGET_DIR = $(if $(OPT_TARGET_DIR),$(REAL_TARGET_DIR)$(OPT_TARGET_DIR),$(REAL_TARGET_DIR))
 # initial definition so that 'make clean' works for most users, even without
 # .config. HOST_DIR will be overwritten later when .config is included.
 HOST_DIR := $(BASE_DIR)/host

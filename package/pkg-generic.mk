@@ -678,6 +678,9 @@ $(1)-install:		$(1)-install-staging $(1)-install-target $(1)-install-images
 endif
 
 ifeq ($$($(2)_INSTALL_TARGET),YES)
+ifdef $(3)_VERSION
+$(1)-install-target:		OPT_TARGET_DIR=/opt/$(1)-$$($(3)_VERSION)
+endif
 $(1)-install-target:		$$($(2)_TARGET_INSTALL_TARGET)
 $$($(2)_TARGET_INSTALL_TARGET):	$$($(2)_TARGET_BUILD)
 else
