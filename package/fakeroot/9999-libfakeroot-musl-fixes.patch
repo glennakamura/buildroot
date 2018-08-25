@@ -1,0 +1,25 @@
+--- a/libfakeroot.c
++++ b/libfakeroot.c
+@@ -30,6 +30,7 @@
+    always bombs. Simple fix:
+ */
+ #define _GNU_SOURCE
++#define _STAT_VER 0
+ 
+ #define FAKEROOT_LIBFAKEROOT
+ 
+@@ -81,12 +82,14 @@
+ #define SEND_STAT64(a,b,c) send_stat64(a,b,c)
+ #define SEND_GET_STAT(a,b) send_get_stat(a,b)
+ #define SEND_GET_STAT64(a,b) send_get_stat64(a,b)
++#define SEND_GET_XATTR(a,b,c) send_get_xattr(a,b,c)
+ #define SEND_GET_XATTR64(a,b,c) send_get_xattr64(a,b,c)
+ #else
+ #define SEND_STAT(a,b,c) send_stat(a,b)
+ #define SEND_STAT64(a,b,c) send_stat64(a,b)
+ #define SEND_GET_STAT(a,b) send_get_stat(a)
+ #define SEND_GET_STAT64(a,b) send_get_stat64(a)
++#define SEND_GET_XATTR(a,b,c) send_get_xattr(a,b)
+ #define SEND_GET_XATTR64(a,b,c) send_get_xattr64(a,b)
+ #endif
+ 
