@@ -257,7 +257,7 @@ endef
 
 ifeq ($(BR2_INIT_BUSYBOX),y)
 define BUSYBOX_INSTALL_INITTAB
-	$(INSTALL) -D -m 0644 package/busybox/inittab $(TARGET_DIR)/etc/inittab
+	$(INSTALL) -D -m 0644 package/busybox/inittab $(REAL_TARGET_DIR)/etc/inittab
 endef
 endif
 
@@ -331,6 +331,8 @@ define BUSYBOX_INSTALL_TARGET_CMDS
 	# Use the 'noclobber' install rule, to prevent BusyBox from overwriting
 	# any full-blown versions of apps installed by other packages.
 	$(BUSYBOX_MAKE_ENV) $(MAKE) $(BUSYBOX_MAKE_OPTS) -C $(@D) install-noclobber
+	$(INSTALL) -d -m 0755 $(REAL_TARGET_DIR)/bin
+	ln -nf $(TARGET_DIR)/bin/busybox $(REAL_TARGET_DIR)/bin/busybox
 	$(BUSYBOX_INSTALL_INITTAB)
 	$(BUSYBOX_INSTALL_UDHCPC_SCRIPT)
 	$(BUSYBOX_INSTALL_MDEV_CONF)
